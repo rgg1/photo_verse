@@ -1,0 +1,33 @@
+{% load static %}
+{% load tz %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conversation</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'messaging/style.css' %}">
+</head>
+<body>
+    <h1>Conversation with 
+        {% if conversation.user1 == request.user %}
+            {{ conversation.user2.username }}
+        {% else %}
+            {{ conversation.user1.username }}
+        {% endif %}
+    </h1>
+    <button onclick="location.href='{% url 'conversations' %}'" style="float: right;">Back to Conversations</button>
+    <div class="conversation-messages">
+        {% for message in messages %}
+            <div>
+                <h2>{{ message.sender.username }}</h2>
+                <h4>{{ message.content }}</h4>
+                <p>{{ message.timestamp|timezone:request.user.userprofile.timezone }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Send">
+    </form>
+</body>
+</html>

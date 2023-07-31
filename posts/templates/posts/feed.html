@@ -1,0 +1,64 @@
+{% load post_extras %}
+{% load static %}
+{% load tz %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feed</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/style.css' %}">
+</head>
+<body>
+    <div class="header">
+        <button class="btn" onclick="location.href='{% url 'new_post' %}'">New Post</button>
+        <button class="btn" onclick="location.href='{% url 'notifications' %}'">Notifications ({{ unread_notifications_count }})</button>
+        <button class="btn profile-btn" onclick="location.href='{% url 'profile' request.user.id %}'">View Profile</button>
+        <button class="btn edit-profile-btn" onclick="location.href='{% url 'edit_profile' %}'">Edit Profile</button>
+        <button class="btn message-btn" onclick="location.href='{% url 'conversations' %}'">Messages</button>
+        <form class="search-form" action="{% url 'user_search' %}" method="post">
+            {% csrf_token %}
+            {{ form.username }}
+            <input type="submit" value="Search">
+        </form>
+        <form class="logout-form" action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Logout">
+        </form>
+    </div>    
+    
+    <div class="content">
+        <div class="posts">
+            {% for post in posts %}
+                <div class="post">
+                    <div class="user-info">
+                        <img class="profile-pic" src="{{ post.user.userprofile.profile_picture.url }}" alt="{{ post.user.username }}'s profile picture">
+                            <a href="{% url 'profile' post.user.id %}" class="feed-user-link">{{ post.user.username }}</a>
+                    </div>
+                    <h3>{{ post.caption }}</h3>
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="Post image">
+                    {% endif %}
+                    <p>{{ post.timestamp|timezone:request.user.userprofile.timezone }}</p>
+                    <p><a href="{% url 'likes' post.id %}">{{ post.like_set.count }}</a> likes, {{ post.comment_set.count }} comments</p>
+                    <form class="like-form" action="{% url 'like_post' post.id %}" method="post">
+                        {% csrf_token %}
+                        {% if request.user|has_liked:post %}
+                            <input type="submit" value="Unlike">
+                        {% else %}
+                            <input type="submit" value="Like">
+                        {% endif %}
+                    </form>
+                    <button class="btn comment-btn" onclick="location.href='{% url 'comments' post.id %}'">Comments</button>
+                </div>
+            {% empty %}
+                <p>No recent posts, try following some more users</p>
+            {% endfor %}
+        </div>
+        <div class="popular-users">
+            <h2>Popular Users</h2>
+            {% for user in popular_users %}
+                <p><a href="{% url 'profile' user.id %}">{{ user.username }}</a>: {{ user.num_followers }} followers</p>
+            {% endfor %}
+        </div>
+    </div> 
+</body>
+</html>

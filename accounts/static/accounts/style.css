@@ -1,0 +1,151 @@
+body {
+    background-color: #FAF3F3;
+    font-family: Arial, sans-serif;
+}
+
+body > img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #d4b8ec;
+    color: white;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.profile-header button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #6A0572;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.profile-header h1 {
+    margin: 0;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-info img {
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.profile-posts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.post {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+h1 {
+    text-align: center;
+    color: #4C4C6D;
+    font-size: 2em;
+}
+
+button {
+    display: block;
+    width: 200px;
+    height: 50px;
+    margin: 20px auto;
+    background-color: #6A0572;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 20px;
+}
+
+button:hover {
+    background-color: #2B2B52;
+}
+
+form {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    margin: auto;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #CCC;
+}
+
+input[type="submit"] {
+    display: block;
+    width: 100%;
+    height: 40px;
+    margin: 20px auto;
+    background-color: #6A0572;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #2B2B52;
+}
+
+.otherImg {
+    display: block;
+    margin: 20px auto;
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.landImage {
+    width: 45%;
+    height: auto;
+}
+
+.errorlist {
+    color: red;
+}
+
+.btn-danger {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #f42c2c;
+    color: #FFFFFF;
+    border-radius: 20px;
+    cursor: pointer;
+}

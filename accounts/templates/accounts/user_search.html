@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Search</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/style.css' %}">
+</head>
+<body>
+    <h1>Search Users</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Search">
+    </form>
+</body>
+</html>

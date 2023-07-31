@@ -1,0 +1,34 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notifications</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'notifications/style.css' %}">
+</head>
+<body>
+    <h1 class="main-heading">Your Notifications</h1>
+    <button class="button-class" onclick="location.href='{% url 'feed' %}'">Back to feed</button>
+    <div class="main-content">
+        <ul>
+            {% load tz %}
+            {% for notification in notifications %}
+                <li class="notification-item">
+                    {% if notification.type == 'message' %}
+                        <p>{{ notification.extra_info }} sent you a message on {{ notification.created_at|timezone:user.userprofile.timezone }}</p>
+                    {% elif notification.type == 'follow' %}
+                        <p>{{ notification.extra_info }} followed you on {{ notification.created_at|timezone:user.userprofile.timezone }}</p>
+                    {% elif notification.type == 'like' %}
+                        <p>{{ notification.extra_info }} liked your post on {{ notification.created_at|timezone:user.userprofile.timezone }}</p>
+                    {% elif notification.type == 'comment' %}
+                        <p>{{ notification.extra_info }} commented on your post on {{ notification.created_at|timezone:user.userprofile.timezone }}</p>
+                    {% endif %}
+                </li>
+            {% empty %}
+                <li class="notification-item">No notifications yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+

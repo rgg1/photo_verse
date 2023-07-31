@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm Account Deletion</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/style.css' %}">
+</head>
+<body>
+    <h1>Are you sure you want to delete your account?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Yes, delete my account">
+    </form>
+    <button onclick="location.href='{% url 'edit_profile' %}'">No, take me back</button>
+</body>
+</html>

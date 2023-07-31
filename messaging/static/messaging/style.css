@@ -1,0 +1,64 @@
+body {
+    background-color: #FAF3F3;
+    font-family: Arial, sans-serif;
+    color: #505A5B;
+}
+
+h1 {
+    text-align: center;
+    color: #505A5B;
+    font-size: 2em;
+}
+
+button {
+    font-size: 1.2em;
+    color: white;
+    background-color: #6A0572;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.conversations {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.conversation {
+    margin: 10px;
+    background-color: #EDD2DF;
+    border-radius: 5px;
+    padding: 10px;
+    width: 80%;
+}
+
+.conversation a {
+    text-decoration: none;
+    color: #505A5B;
+}
+
+.conversation-heading {
+    font-size: 24px;
+    color: #6A0572;
+}
+
+.latest-message-time {
+    font-size: 14px;
+}
+
+.conversation-messages div {
+    background-color: #EDD2DF;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+}

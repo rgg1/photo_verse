@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Profile</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/style.css' %}">
+    <style>
+        #image-preview {
+            object-fit: cover;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Profile</h1>
+    <button onclick="location.href='{% url 'feed' %}'" style="float: right;">Back to feed</button>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>
+            {{ form.display_name.label_tag }}<br>
+            {{ form.display_name }}
+        </p>
+        <p>
+            {{ form.bio.label_tag }}<br>
+            {{ form.bio }}
+        </p>
+        <p>
+            {{ form.profile_picture.label_tag }}<br>
+            {{ form.profile_picture }}
+        </p>
+        <p>
+            {{ form.timezone.label_tag }}<br>
+            {{ form.timezone }}
+        </p>
+        {% if form.instance.profile_picture %}
+            <img class="otherImg" id="image-preview" src="{{ form.instance.profile_picture.url }}" />
+        {% else %}
+            <img class="otherImg" id="image-preview" />
+        {% endif %}
+        <br>
+        <p style="text-align: center;">Supported photo formats: PNG, JPG</p>
+        <input type="submit" value="Save Changes">
+    </form>
+    <a href="{% url 'delete_account' %}" class="btn-danger">Delete Account</a>
+    <script>
+        document.getElementById("id_profile_picture").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            const url = URL.createObjectURL(file);
+            document.getElementById("image-preview").src = url;
+        });
+    </script>
+</body>
+</html>

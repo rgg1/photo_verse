@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Post</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/style.css' %}">
+    <style>
+        #image-preview {
+            object-fit: cover;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>New Post</h1>
+    <button class="btn" onclick="location.href='{% url 'feed' %}'">Back to feed</button>
+    <form method="post" enctype="multipart/form-data" class="form-content">
+        {% csrf_token %}
+        <div class="form-field">
+            <p>Caption:</p>
+            <textarea name="caption" id="id_caption" rows="3">{{ form.caption.value|default:'' }}</textarea>
+        </div>
+        <div class="form-field">
+            {{ form.image.label_tag }}
+            {{ form.image }}
+        </div>
+        <img id="image-preview" /><br>
+        <p>Supported photo formats: PNG, JPG</p>
+        <input type="submit" value="Post">
+    </form>
+    <script>
+        document.getElementById("id_image").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            const url = URL.createObjectURL(file);
+            document.getElementById("image-preview").src = url;
+        });
+    </script>
+</body>
+</html>

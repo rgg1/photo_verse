@@ -1,0 +1,8 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/style.css' %}">
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+    <button onclick="location.href='{% url 'landing' %}'">Return</button>
+</form>

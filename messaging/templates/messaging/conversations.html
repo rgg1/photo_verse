@@ -1,0 +1,43 @@
+{% load static %}
+{% load tz %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conversations</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'messaging/style.css' %}">
+</head>
+<body>
+    <h1>Your Conversations</h1>
+    <button onclick="location.href='{% url 'feed' %}'" style="float: right;">Back to feed</button>
+
+    <p>Search for user profiles</p>
+    <form method="get">
+        {% csrf_token %}
+        {{ form.username }}
+        <input type="submit" value="Search">
+    </form>
+
+    {% for user in users %}
+        <p><a href="{% url 'profile' user.id %}">{{ user.username }}</a></p>
+    {% endfor %}
+
+    <div class="conversations">
+        {% for conversation in conversations %}
+            <div class="conversation">
+                <a href="{% url 'conversation' conversation.id %}">
+                    <p class="conversation-heading">Conversation with 
+                    {% if conversation.user1 == request.user %}
+                        {{ conversation.user2.username }}
+                    {% else %}
+                        {{ conversation.user1.username }}
+                    {% endif %}
+                    </p>
+                    <p class="latest-message-time">Last message sent on {{ conversation.latest_message_time|timezone:request.user.userprofile.timezone }}</p>
+                </a>
+            </div>
+        {% empty %}
+            <p>No conversations yet.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

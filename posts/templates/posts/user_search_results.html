@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/style.css' %}">
+</head>
+<body>
+    <h1>Search Results</h1>
+    <button class="btn" onclick="location.href='{% url 'feed' %}'">Back to feed</button>
+    <form class="search-form" action="{% url 'user_search' %}" method="post">
+        {% csrf_token %}
+        {{ form.username }}
+        <input type="submit" value="Search">
+    </form>
+    {% for user in users %}
+        <div class="user-result">
+            <h3>@{{ user.username }}</h3>
+            <a href="{% url 'profile' user.id %}">View Profile</a>
+        </div>
+    {% endfor %}
+</body>
+</html>

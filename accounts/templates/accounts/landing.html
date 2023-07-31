@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/style.css' %}">
+</head>
+<body>
+    <h1>Welcome to PhotoVerse</h1>
+    <button onclick="location.href='{% url 'password_reset' %}'">Reset Password</button>
+    <button onclick="location.href='{% url 'login' %}'">Login</button>
+    <button onclick="location.href='{% url 'register' %}'">Register</button>
+    <img class="landImage" src="{% static 'accounts/landing_img.jpg' %}" alt="My Image">
+</body>
+</html>

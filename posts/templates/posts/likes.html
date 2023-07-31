@@ -1,0 +1,28 @@
+{% load static %}
+{% load tz %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Likes</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/style.css' %}">
+</head>
+<body>
+    <button class="btn" onclick="location.href='{% url 'feed' %}'">Back to feed</button>
+    <!-- display the post at the top of the page -->
+    <div class="post-content">
+        <h1>{{ post.user.username }}</h1>
+        <h3>{{ post.caption }}</h3>
+        <img src="{{ post.image.url }}" alt="Post image" style="max-width: 200px; max-height: 200px;">
+        <p>{{ post.timestamp|timezone:request.user.userprofile.timezone }}</p>
+    </div>
+    <!-- display the likes -->
+    <div class="likes-content">
+        <h2>Likes:</h2>
+        {% for like in likes %}
+            <div class="like">
+                <h3>{{ like.user.username }}</h3>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
