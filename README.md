@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a Django social media project, currently hosted online at "https://photo-verse.com".
+This is a Django social media project, currently hosted online at https://photo-verse.com.
 This website supports many functionalities, such as making posts with photos and captions, customizing your profile,
 following other users, liking and commenting on posts, messaging other users, deleting posts,
 deleting your account, searching for other users, changing your timezone, and getting notifications
